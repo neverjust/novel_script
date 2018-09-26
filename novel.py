@@ -3,14 +3,14 @@ import smtplib
 from bs4 import BeautifulSoup
 import requests
 from email.mime.text import MIMEText
-from email.header import Header
-
+import os
 class novel(object):
     url = "https://www.23us.so/files/article/html/"
-    sender = ''
-    pwd = ''
-    receiver = ''
-    mail_host = '' #授权码
+    page_place = os.path.abspath('..') + "/page.txt"
+    sender = 'xxxian1999@126.com'
+    pwd = 'xxxian1999'
+    receiver = '312726839@qq.com'
+    mail_host = 'smtp.126.com'
     book_tags = [
     '6/6276/',#秘诡之主
     '22/22791/',#克斯玛帝国
@@ -26,7 +26,7 @@ class novel(object):
 
     def get_newest(self,url):
         url = url + '\d+.html'
-        file = open('/root/novel/page.txt', "r+")
+        file = open(self.page_place, "r+")
         content = file.read()
         new_url = re.search(url, content).group(0)
         return new_url
@@ -41,12 +41,12 @@ class novel(object):
             return False
         else:
             new_url = "https://www.23us.so"+ page[-2].get('href')
-            file = open('/root/novel/page.txt', "r+")
+            file = open(self.page_place, "r+")
             content = file.read().replace(url,new_url)
             file.seek(0,0)
             file.write(content)
             return "https://www.23us.so"+ page[-2].get('href')
-    #先爬取标题和文章
+
 
 
     def send(self,url):
@@ -83,6 +83,4 @@ class novel(object):
 if __name__ == '__main__':
     obj = novel()
     obj.run()
-
-
 
