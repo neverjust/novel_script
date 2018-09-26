@@ -19,5 +19,5 @@ https://www.23us.so/files/article/html/6/6276/12602808.html
 https://www.23us.so/files/article/html/22/22791/12614215.html
  ``` 
 + 挂到服务器上之后 用cron定时每分钟运行一次
-    > crontab -e 
+    > crontab -e     
     > */1 * * * * python 脚本绝对路径
